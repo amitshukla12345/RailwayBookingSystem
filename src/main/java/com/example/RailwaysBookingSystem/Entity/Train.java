@@ -1,4 +1,4 @@
-package com.example.RailwaysBookingSystem.Train;
+package com.example.RailwaysBookingSystem.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
