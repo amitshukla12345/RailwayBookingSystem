@@ -1,12 +1,16 @@
-package com.example.RailwaysBookingSystem.Entity;
+ package com.example.RailwaysBookingSystem.Entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +19,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingTable {
+public class Booking {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookingId;
 
-    @Column(nullable = false)
-    private int userId;
+    @ManyToOne
+    private  User user;
 
-    @Column(nullable = false)
-    private int trainNo;
+    @ManyToOne
+    private Train train;
 
     @Column(nullable = false)
     private LocalDateTime bookingDate;
@@ -35,8 +39,8 @@ public class BookingTable {
     @Column(nullable = false)
     private int seatNumber;
 
-    @Column(nullable = false)
-    private String reservation; 
+//    @Column(nullable = false)
+//    private String reservation; 
 
     @Column(nullable = false)
     private String paymentStatus;
@@ -46,4 +50,12 @@ public class BookingTable {
 
     @Column(nullable = false)
     private long pnrNo;
+    
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "booking")
+    private List<Notification> notificaton;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "booking")
+    private List<Passenger> passengers;
+    
 }
